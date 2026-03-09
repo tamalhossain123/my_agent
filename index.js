@@ -11,3 +11,16 @@ bot.on('message', async (msg) => {
 });
 
 console.log("Bot is running...");
+
+// Render-এর পোর্টের সমস্যা সমাধান করতে এই অংশটুকু যোগ করুন
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 10000;
+
+app.get('/', (req, res) => {
+  res.send('Professor Bot is Alive!');
+});
+
+app.listen(port, () => {
+  console.log(`Health check server listening at http://localhost:${port}`);
+});
