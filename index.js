@@ -5,14 +5,13 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 bot.on('message', async (msg) => {
-  console.log("New message received from:", msg.chat.id); // এই লাইনটি যোগ করুন
+  console.log("Message received: ", msg.text); // এই লাইনটি মেসেজ চেক করবে
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
     const result = await model.generateContent(msg.text);
     bot.sendMessage(msg.chat.id, result.response.text());
-    console.log("Reply sent successfully!"); 
-  } catch (error) {
-    console.error("Gemini Error:", error);
+  } catch (err) {
+    console.log("Gemini Error: ", err);
   }
 });
 
