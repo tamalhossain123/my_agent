@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 bot.on('message', async (msg) => {
   console.log("Message received: ", msg.text); // এই লাইনটি মেসেজ চেক করবে
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent(msg.text);
     bot.sendMessage(msg.chat.id, result.response.text());
   } catch (err) {
